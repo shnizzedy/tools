@@ -1,3 +1,5 @@
+#!/bin/bash
+# author: AD7six
 git ls-files > keep-these.txt
 git filter-branch --force --index-filter \
 "git rm  --ignore-unmatch --cached -qr . ; \
