@@ -1,0 +1,8 @@
+#!/bin/bash
+# docker-all-logs: List all containers and their logs, requiring a keypress to continue after each container.
+# Usage: docker-all-logs
+for CONTAINER in $(docker ps | tail -n $(expr $(docker ps | wc -l) - 1) | cut -c 116-)
+do
+  docker logs $CONTAINER
+  read -n 1 -p "↑ $CONTAINER ↑"
+done
