@@ -13,7 +13,12 @@ I=0
 NUMBER_OF_CONTAINERS=$(expr $(docker ps | wc -l) - 1)
 for CONTAINER in $(docker ps --format 'table {{.Names}}' | tail -n $NUMBER_OF_CONTAINERS)
 do
-  docker logs $CONTAINER
+  if [[ "$#" -ne 0 ]]
+  then # Allow pass-through 'head' 'tail' or 'less'
+    docker logs $CONTAINER | $@
+  else
+    docker logs $CONTAINER
+  fi
   I=$(expr $I + 1)
   if [ $I -lt $NUMBER_OF_CONTAINERS ]
   then
