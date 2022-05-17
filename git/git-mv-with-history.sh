@@ -1,6 +1,9 @@
 #!/bin/bash
 #
 # git-mv-with-history -- move/rename file or folder, with history.
+# 
+# Copyright © 2013  Emanuel Miller
+# https://gist.github.com/emiller/6769886
 #
 # Moving a file in git doesn't track history, so the purpose of this
 # utility is best explained from the kernel wiki:

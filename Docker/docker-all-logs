@@ -1,6 +1,14 @@
 #!/bin/bash
+# 
 # docker-all-logs: List all containers and their logs, requiring a keypress to continue after each container.
+# 
+# Written in 2022 by Jon Clucas https://github.com/shnizzedy
+# 
+# To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
+# You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+# 
 # Usage: docker-all-logs
+
 for CONTAINER in $(docker ps | tail -n $(expr $(docker ps | wc -l) - 1) | cut -c 116-)
 do
   docker logs $CONTAINER
