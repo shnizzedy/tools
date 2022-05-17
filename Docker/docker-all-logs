@@ -9,8 +9,16 @@
 # 
 # Usage: docker-all-logs
 
-for CONTAINER in $(docker ps --format 'table {{.Names}}' | tail -n $(expr $(docker ps | wc -l) - 1))
+I=0
+NUMBER_OF_CONTAINERS=$(expr $(docker ps | wc -l) - 1)
+for CONTAINER in $(docker ps --format 'table {{.Names}}' | tail -n $NUMBER_OF_CONTAINERS)
 do
   docker logs $CONTAINER
-  read -n 1 -p "↑ $CONTAINER ↑"
+  I=$(expr $I + 1)
+  if [ $I -lt $NUMBER_OF_CONTAINERS ]
+  then
+    read -n 1 -p "↑ $CONTAINER ↑"
+  else
+    echo "↑ $CONTAINER ↑"
+  fi
 done
